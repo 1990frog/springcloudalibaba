@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /producer
+spring:
+  application:
+    name: producer
+  cloud:
+    nacos:
+      username: ${NACOS_USER:nacos}
+      password: ${NACOS_PWD:P@ssw0rd123}
+      discovery:
+        namespace: ${NACOS_NAMESPACE:dev}
+        server-addr: ${NACOS_HOST:nacos}:${NACOS_PORT:8848}

@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      username: ${NACOS_USER:nacos}
+      password: ${NACOS_PWD:P@ssw0rd123}
+      discovery:
+        namespace: ${NACOS_NAMESPACE:dev}
+        server-addr: ${NACOS_HOST:nacos}:${NACOS_PORT:8848}
+        metadata:
+          management:
+            context-path: '${server.servlet.context-path}/actuator'
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          route-id-prefix: ${spring.application.name}
+      routes:
+        - id: producer
+          uri: lb://producer
+          predicates:
+            - Path=/producer/**
+          filters:
+            - StripPrefix=1
