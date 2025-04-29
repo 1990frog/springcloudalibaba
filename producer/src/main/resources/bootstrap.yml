@@ -5,10 +5,33 @@ server:
 spring:
   application:
     name: producer
+#  main:
+#    allow-bean-definition-overriding: true
   cloud:
     nacos:
       username: ${NACOS_USER:nacos}
-      password: ${NACOS_PWD:P@ssw0rd123}
+      password: ${NACOS_PWD:nacos}
       discovery:
         namespace: ${NACOS_NAMESPACE:dev}
         server-addr: ${NACOS_HOST:nacos}:${NACOS_PORT:8848}
+        metadata:
+          management:
+            context-path: '${server.servlet.context-path}/actuator'
+#        ip: 192.168.8.53
+      #config:
+      #  namespace: ${NACOS_NAMESPACE:data-middle-platform}
+      #  server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      #  file-extension: yml
+      #  shared-configs:
+      #    - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  profiles:
+    active: dev
+  boot:
+    admin:
+      client:
+        instance:
+          service-url: ${server.servlet.context-path}
+          health-url: ${server.servlet.context-path}/actuator/health
+          management-url: ${server.servlet.context-path}/actuator
+  quartz:
+    auto-startup: false
