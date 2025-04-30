@@ -20,22 +20,30 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
-			<version>4.1.7</version>
 		</dependency>
 		<!-- 若需整合服务发现（如 Nacos/Eureka），需额外添加依赖 -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>
-			<version>3.1.5</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<!-- WebFlux 依赖（Spring Cloud Gateway 基于响应式模型） -->
 		<!--		<dependency>-->
 		<!--			<groupId>org.springframework.boot</groupId>-->

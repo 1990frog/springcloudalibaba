@@ -8,18 +8,17 @@ spring:
       username: ${NACOS_USER:nacos}
       password: ${NACOS_PWD:nacos}
       discovery:
-        namespace: ${NACOS_NAMESPACE:dev}
+        namespace: ${NACOS_NAMESPACE:public}
         group: ${NACOS_GROUP:DEFAULT_GROUP}
         server-addr: ${NACOS_HOST:nacos}:${NACOS_PORT:8848}
-        metadata:
-          management:
-            context-path: '${server.servlet.context-path}/actuator'
+        # metadata:
+        #   management:
+        #     context-path: '${server.servlet.context-path}/actuator'
     gateway:
       discovery:
         locator:
-          enabled: true
           lower-case-service-id: true
-          route-id-prefix: ${spring.application.name}
+          enabled: true
       routes:
         - id: producer
           uri: lb://producer
@@ -27,3 +26,11 @@ spring:
             - Path=/producer/**
           filters:
             - StripPrefix=1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway,health,info  # 暴露指定端点
+  endpoint:
+    gateway:
+      enabled: true                   # 开启 Gateway 端点
